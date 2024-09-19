@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tipic;
 use App\Http\Requests\StoreTipicRequest;
 use App\Http\Requests\UpdateTipicRequest;
+use App\Http\Resources\TipicResource;
 
 class TipicController extends Controller
 {
@@ -14,7 +15,7 @@ class TipicController extends Controller
     public function index()
     {
         //
-        return Tipic::all(); //返回所有的数据
+        return TipicResource::collection(Tipic::paginate()); //返回所有的数据->分页
     }
 
     /**
