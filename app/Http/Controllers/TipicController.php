@@ -6,6 +6,7 @@ use App\Models\Tipic;
 use App\Http\Requests\StoreTipicRequest;
 use App\Http\Requests\UpdateTipicRequest;
 use App\Http\Resources\TipicResource;
+use Illuminate\Support\Facades\Auth;
 
 class TipicController extends Controller
 {
@@ -21,10 +22,7 @@ class TipicController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create(StoreTipicRequest $request) {}
 
     /**
      * Store a newly created resource in storage.
@@ -32,6 +30,14 @@ class TipicController extends Controller
     public function store(StoreTipicRequest $request)
     {
         //
+        //新增一条帖子
+        $tipic = new Tipic();
+        $tipic->user_id = Auth::id();
+        $tipic->title = $request->input('title');
+        $tipic->content = $request->input('content');
+        $tipic->save();
+        // return Auth::id(); // 返回当前用户
+
     }
 
     /**
