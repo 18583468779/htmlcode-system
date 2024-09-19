@@ -32,12 +32,13 @@ class TipicController extends Controller
         //
         //新增一条帖子
         $tipic = new Tipic();
+        // $tipic->fill($request->all());
         $tipic->user_id = Auth::id();
         $tipic->title = $request->input('title');
         $tipic->content = $request->input('content');
         $tipic->save();
         // return Auth::id(); // 返回当前用户
-
+        // return $request->all();
     }
 
     /**
