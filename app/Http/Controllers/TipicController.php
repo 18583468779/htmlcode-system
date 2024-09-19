@@ -14,6 +14,7 @@ class TipicController extends Controller
     public function index()
     {
         //
+        return Tipic::all(); //返回所有的数据
     }
 
     /**
