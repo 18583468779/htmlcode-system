@@ -27,15 +27,13 @@ class TipicController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTipicRequest $request)
+    public function store(StoreTipicRequest $request, Tipic $tipic)
     {
-        //
         //新增一条帖子
-        $tipic = new Tipic();
-        // $tipic->fill($request->all());
+        $tipic->fill($request->all());
         $tipic->user_id = Auth::id();
-        $tipic->title = $request->input('title');
-        $tipic->content = $request->input('content');
+        // $tipic->title = $request->input('title');
+        // $tipic->content = $request->input('content');
         $tipic->save();
         // return Auth::id(); // 返回当前用户
         // return $request->all();
