@@ -22,7 +22,10 @@ class StoreTipicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            //表单验证
+            'title' => ['required', 'between:5,10'],
+            'content' => ['required', 'between:10,200'],
+
         ];
     }
 }
