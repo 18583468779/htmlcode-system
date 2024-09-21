@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,11 @@ class AuthController extends Controller
                     $fail('用户不存在，请检查账号');
                 }
             }],
-            'password' => 'required'
+            'password' => ['required', function ($attr, $value, $fail) use ($user, $request) {
+                if (!$user || !Hash::check($request->input('password'), $user->password)) {
+                    $fail('密码错误，请确认密码');
+                }
+            }]
         ]);
         return $user;
     }
