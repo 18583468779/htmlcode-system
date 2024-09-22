@@ -26,7 +26,7 @@ class TipicController extends Controller implements HasMiddleware
     public function index()
     {
         //
-        return TipicResource::collection(Tipic::paginate()); //返回所有的数据->分页
+        return TipicResource::collection(Tipic::with('user')->paginate()); //返回所有的数据->关联user->分页
     }
 
     /**

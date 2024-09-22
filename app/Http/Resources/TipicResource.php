@@ -16,7 +16,6 @@ class TipicResource extends JsonResource
     {
         return [
             ...parent::toArray($request),
-            'user' => $this->user->toArray() // 关联user
         ];
     }
 }
