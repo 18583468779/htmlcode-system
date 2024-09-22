@@ -11,3 +11,4 @@ Route::get('/', function () {
 Route::resource('tipic', TipicController::class)->except(['create', 'edit']);
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
