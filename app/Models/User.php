@@ -28,8 +28,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        // 返回给前端隐藏的值
         'password',
         'remember_token',
+        'mobile',
+        'unionid',
+        'email'
     ];
 
     /**
