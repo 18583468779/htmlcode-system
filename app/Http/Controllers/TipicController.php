@@ -36,6 +36,7 @@ class TipicController extends Controller
         // $tipic->content = $request->input('content');
         $tipic->save();
         // return Auth::id(); // 返回当前用户
+        return new TipicResource($tipic);
     }
 
     /**

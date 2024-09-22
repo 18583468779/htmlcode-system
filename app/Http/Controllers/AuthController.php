@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -33,7 +34,13 @@ class AuthController extends Controller
                 }
             }]
         ]);
-        return $user;
+        Auth::login($user, true); // 用户登录
+        return ['code' => 0, 'msg' => '恭喜你，登录成功'];
+    }
+    public function logout()
+    {
+        Auth::logout(); // 退出登录
+        return ['code' => 0, 'msg' => '退出登录成功'];
     }
     public function register() {}
 }
