@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 class Tipic extends Model
 {
@@ -18,4 +19,10 @@ class Tipic extends Model
     //     'id',
     //     'user_id'
     // ];
+
+    public function user()
+    {
+        // 帖子关联用户
+        return $this->belongsTo(User::class);
+    }
 }

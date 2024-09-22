@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTipicRequest;
 use App\Http\Requests\UpdateTipicRequest;
 use App\Http\Resources\TipicResource;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 
 class TipicController extends Controller implements HasMiddleware
@@ -14,7 +15,10 @@ class TipicController extends Controller implements HasMiddleware
     public static function middleware()
     {
         // 当前类所有的方法都需要登录验证
-        return ['auth'];
+        // return ['auth'];
+        return [
+            new Middleware('auth', except: ['index', 'show'])
+        ];
     }
     /**
      * Display a listing of the resource.
