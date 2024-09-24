@@ -9,6 +9,7 @@ use App\Http\Resources\TipicResource;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TipicController extends Controller implements HasMiddleware
 {
@@ -34,6 +35,7 @@ class TipicController extends Controller implements HasMiddleware
      */
     public function store(StoreTipicRequest $request, Tipic $tipic)
     {
+        Gate::authorize('create', Tipic::class); // policy策略
         //新增一条帖子
         $tipic->fill($request->all());
         $tipic->user_id = Auth::id();

@@ -30,6 +30,8 @@ class TipicPolicy
     public function create(User $user): bool
     {
         //
+
+        return !$user->is_lock; // 被锁定用户无法发表帖子
     }
 
     /**
