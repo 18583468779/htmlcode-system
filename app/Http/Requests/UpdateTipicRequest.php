@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateTipicRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateTipicRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,10 @@ class UpdateTipicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            //表单验证
+            'title' => ['required', 'between:5,10'],
+            'content' => ['required', 'between:10,3000'],
+
         ];
     }
 }

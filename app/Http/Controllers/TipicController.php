@@ -25,14 +25,9 @@ class TipicController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
-        return TipicResource::collection(Tipic::with('user')->paginate()); //返回所有的数据->关联user->分页
+        //返回所有的数据->关联user->分页(用户不传row参数就默认10条)
+        return TipicResource::collection(Tipic::with('user')->paginate(request('row', '10')));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(StoreTipicRequest $request) {}
 
     /**
      * Store a newly created resource in storage.
@@ -54,15 +49,8 @@ class TipicController extends Controller implements HasMiddleware
      */
     public function show(Tipic $tipic)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tipic $tipic)
-    {
-        //
+        // 获取单条的帖子
+        return new TipicResource($tipic);
     }
 
     /**
@@ -71,6 +59,13 @@ class TipicController extends Controller implements HasMiddleware
     public function update(UpdateTipicRequest $request, Tipic $tipic)
     {
         //
+        if (Auth::id() !== $tipic->user_id) {
+            // 不允许修改别人的帖子
+            abort(403);
+        }
+        $tipic->fill($request->all()); // 使用 fill 方法填充数据
+        $tipic->save(); // 保存更新后的数据
+        return new TipicResource($tipic); // 返回更新后的帖子资源
     }
 
     /**
