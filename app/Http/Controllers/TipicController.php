@@ -39,10 +39,7 @@ class TipicController extends Controller implements HasMiddleware
         //新增一条帖子
         $tipic->fill($request->all());
         $tipic->user_id = Auth::id();
-        // $tipic->title = $request->input('title');
-        // $tipic->content = $request->input('content');
         $tipic->save();
-        // return Auth::id(); // 返回当前用户
         return new TipicResource($tipic);
     }
 
@@ -60,11 +57,7 @@ class TipicController extends Controller implements HasMiddleware
      */
     public function update(UpdateTipicRequest $request, Tipic $tipic)
     {
-        //
-        if (Auth::id() !== $tipic->user_id) {
-            // 不允许修改别人的帖子
-            abort(403);
-        }
+        Gate::authorize('update', Tipic::class); // policy策略
         $tipic->fill($request->all()); // 使用 fill 方法填充数据
         $tipic->save(); // 保存更新后的数据
         return new TipicResource($tipic); // 返回更新后的帖子资源

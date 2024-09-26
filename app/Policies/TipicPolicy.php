@@ -47,7 +47,8 @@ class TipicPolicy
      */
     public function update(User $user, Tipic $tipic): bool
     {
-        //
+        // 不允许修改别人的贴子
+        return $user->id === $tipic->user_id;
     }
 
     /**
