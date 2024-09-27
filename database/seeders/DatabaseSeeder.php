@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        User::factory(10)->hasTipics(3)->create();
         // 修改第一个用户的信息
         $user = User::first();
         $user->name = 'admin';
         $user->password = Hash::make('admin888');
         $user->save();
-        Tipic::factory(30)->create();
+        // Tipic::factory(30)->create();
     }
 }

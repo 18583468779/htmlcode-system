@@ -61,4 +61,8 @@ class User extends Authenticatable
             get: fn() => $this->id == 1
         );
     }
+    public function tipics()
+    {
+        return $this->hasMany(Tipic::class); // 一个用户可以有多个帖子
+    }
 }
