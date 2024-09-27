@@ -57,6 +57,7 @@ class TipicPolicy
     public function delete(User $user, Tipic $tipic): bool
     {
         //
+        return $user->id === $tipic->user_id;
     }
 
     /**

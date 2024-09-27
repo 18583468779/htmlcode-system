@@ -69,5 +69,8 @@ class TipicController extends Controller implements HasMiddleware
     public function destroy(Tipic $tipic)
     {
         //
+        Gate::authorize('delete', $tipic);
+        $tipic->delete();
+        return response(null, 204);
     }
 }
