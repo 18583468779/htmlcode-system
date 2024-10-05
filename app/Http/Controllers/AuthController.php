@@ -35,7 +35,7 @@ class AuthController extends Controller
                 }
             }]
         ]);
-        Auth::login($user, true); // 用户登录
+        Auth::login(user: $user); // 用户登录
         return ['code' => 0, 'msg' => '恭喜你，登录成功'];
     }
 
