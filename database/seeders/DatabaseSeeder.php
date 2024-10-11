@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tipic;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            ChapterSeeder::class
+        ]);
         User::factory(10)->hasTipics(3)->create();
         // 修改第一个用户的信息
         $user = User::first();
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $user->password = Hash::make('admin888');
         $user->save();
         // Tipic::factory(30)->create();
+
     }
 }

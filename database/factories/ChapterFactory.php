@@ -18,6 +18,10 @@ class ChapterFactory extends Factory
     {
         return [
             //
+            'title' => fake()->sentence(5),
+            'description' => fake()->paragraph(5),
+            'preview' => fake()->imageUrl(500, 500),
+
         ];
     }
 }
