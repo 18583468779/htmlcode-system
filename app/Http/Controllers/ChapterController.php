@@ -34,10 +34,12 @@ class ChapterController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreChapterRequest $request)
+    public function store(StoreChapterRequest $request, Chapter $chapter)
     {
         //
         Gate::authorize('create', Chapter::class);
+        $chapter->fill($request->input())->save();
+        return new ChapterResource($chapter);
     }
 
     /**

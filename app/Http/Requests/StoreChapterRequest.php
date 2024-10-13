@@ -24,6 +24,10 @@ class StoreChapterRequest extends FormRequest
     {
         return [
             //
+            'title' => ['required', 'between:5,50'],
+            'description' => ['required', 'between:30,1500'],
+            'preview' => ['required', 'url'],
+
         ];
     }
 }
