@@ -29,8 +29,6 @@ class ChapterController extends Controller implements HasMiddleware
         return ChapterResource::collection(Chapter::paginate(request('row', 12)));
     }
 
-
-
     /**
      * Store a newly created resource in storage.
      */
@@ -57,6 +55,9 @@ class ChapterController extends Controller implements HasMiddleware
     public function update(UpdateChapterRequest $request, Chapter $chapter)
     {
         //
+        Gate::authorize('update', Chapter::class);
+        $chapter->fill($request->input())->save();
+        return new ChapterResource($chapter);
     }
 
     /**
@@ -65,5 +66,8 @@ class ChapterController extends Controller implements HasMiddleware
     public function destroy(Chapter $chapter)
     {
         //
+        Gate::authorize('delete', Chapter::class);
+        $chapter->delete();
+        return response()->noContent();
     }
 }

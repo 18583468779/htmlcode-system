@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateChapterRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateChapterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user()->is_administrator;
     }
 
     /**
@@ -23,6 +24,10 @@ class UpdateChapterRequest extends FormRequest
     {
         return [
             //
+            'title' => ['required', 'between:5,50'],
+            'description' => ['required', 'between:30,1500'],
+            'preview' => ['required', 'url'],
+
         ];
     }
 }
