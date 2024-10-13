@@ -50,6 +50,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public $appends = [
+        'is_administrator'
+    ];
+
     /***
      *
      * 是否为超级管理员

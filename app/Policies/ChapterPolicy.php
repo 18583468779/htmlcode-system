@@ -29,7 +29,10 @@ class ChapterPolicy
      */
     public function create(User $user): bool
     {
-        //
+        //必须是管理员才可以添加章节
+        dd($user->is_administrator);
+        dd($user->isAdministrator);
+        return $user->is_administrator;
     }
 
     /**

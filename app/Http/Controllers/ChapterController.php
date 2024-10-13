@@ -6,9 +6,20 @@ use App\Models\Chapter;
 use App\Http\Requests\StoreChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
 use App\Http\Resources\ChapterResource;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class ChapterController extends Controller
+class ChapterController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        // 当前类所有的方法都需要登录验证
+        // return ['auth'];
+        return [
+            new Middleware('auth', except: ['index', 'show'])
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,6 +37,7 @@ class ChapterController extends Controller
     public function store(StoreChapterRequest $request)
     {
         //
+        Gate::authorize('create', Chapter::class);
     }
 
     /**
@@ -34,6 +46,7 @@ class ChapterController extends Controller
     public function show(Chapter $chapter)
     {
         //
+        return new ChapterResource($chapter);
     }
 
     /**
