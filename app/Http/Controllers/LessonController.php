@@ -56,6 +56,8 @@ class LessonController extends Controller implements HasMiddleware
     {
         //
         Gate::authorize('update', Lesson::class);
+        $lesson->fill($request->input())->save();
+        return new LessonResource($lesson);
     }
 
     /**
@@ -63,7 +65,8 @@ class LessonController extends Controller implements HasMiddleware
      */
     public function destroy(Lesson $lesson)
     {
-        //
-        Gate::authorize('delete', Lesson::class);
+        Gate::authorize('delete', $lesson);
+        $lesson->delete();
+        return response(null, 204);
     }
 }
