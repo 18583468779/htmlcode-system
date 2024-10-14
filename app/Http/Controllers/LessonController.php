@@ -6,9 +6,18 @@ use App\Models\Lesson;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 use App\Http\Resources\LessonResource;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class LessonController extends Controller
+class LessonController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show'])
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -25,8 +34,9 @@ class LessonController extends Controller
     public function store(StoreLessonRequest $request, Lesson $lesson)
     {
         //
+        Gate::authorize('create', Lesson::class);
         $lesson->fill($request->input())->save();
-        return $lesson;
+        return new LessonResource($lesson);
     }
 
     /**
@@ -44,6 +54,7 @@ class LessonController extends Controller
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
         //
+        Gate::authorize('update', Lesson::class);
     }
 
     /**
@@ -52,5 +63,6 @@ class LessonController extends Controller
     public function destroy(Lesson $lesson)
     {
         //
+        Gate::authorize('delete', Lesson::class);
     }
 }

@@ -8,6 +8,12 @@ use Illuminate\Auth\Access\Response;
 
 class LessonPolicy
 {
+
+    public function before(User $user)
+    {
+        //必须是管理员才可以添加章节
+        return $user->is_administrator;
+    }
     /**
      * Determine whether the user can view any models.
      */

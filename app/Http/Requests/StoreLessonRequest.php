@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreLessonRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreLessonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()->is_administrator;
     }
 
     /**
@@ -23,6 +24,10 @@ class StoreLessonRequest extends FormRequest
     {
         return [
             //
+            'title' => ['required', 'between:5,50'],
+            'description' => ['required', 'between:30,1500'],
+            'preview' => ['required', 'url'],
+            'chapter_id' => ['required', 'exists:chapters,id']
         ];
     }
 }
