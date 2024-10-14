@@ -5,31 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Lesson;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
+use App\Http\Resources\LessonResource;
 
 class LessonController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Lesson $lesson)
     {
         //
+        return LessonResource::collection(Lesson::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLessonRequest $request)
+    public function store(StoreLessonRequest $request, Lesson $lesson)
     {
         //
+        $lesson->fill($request->input())->save();
+        return $lesson;
     }
 
     /**
@@ -38,14 +35,7 @@ class LessonController extends Controller
     public function show(Lesson $lesson)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Lesson $lesson)
-    {
-        //
+        return new LessonResource($lesson);
     }
 
     /**

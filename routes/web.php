@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TipicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,3 +19,5 @@ Route::post('auth/logout', [AuthController::class, 'logout']);
 Route::resource('tipic', TipicController::class)->except(['create', 'edit']);
 // 创建章节资源路由，排除create,edit方法
 Route::resource('chapter', ChapterController::class)->except(['create', 'edit']);
+// 创建课程资源路由，排除create,edit方法
+Route::resource('lesson', LessonController::class)->except(['create', 'edit']);
