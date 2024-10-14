@@ -15,4 +15,9 @@ class Lesson extends Model
         'preview',
         'chapter_id'
     ];
+
+    public function chapter()
+    {
+        return $this->belongsTo(Chapter::class);
+    }
 }

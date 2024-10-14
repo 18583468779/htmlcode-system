@@ -24,7 +24,8 @@ class LessonController extends Controller implements HasMiddleware
     public function index(Lesson $lesson)
     {
         //
-        return LessonResource::collection(Lesson::all());
+
+        return LessonResource::collection(Lesson::with('chapter')->paginate(request('row', 12)));
     }
 
 
