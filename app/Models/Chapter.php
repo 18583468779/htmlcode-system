@@ -14,4 +14,10 @@ class Chapter extends Model
         'description',
         'preview'
     ];
+
+    public function lessons()
+    {
+        // 一个章节有多个课程
+        return $this->hasMany(Lesson::class);
+    }
 }
