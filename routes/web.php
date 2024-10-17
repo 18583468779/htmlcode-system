@@ -21,3 +21,5 @@ Route::resource('tipic', TipicController::class)->except(['create', 'edit']);
 Route::resource('chapter', ChapterController::class)->except(['create', 'edit']);
 // 创建课程资源路由，排除create,edit方法
 Route::resource('lesson', LessonController::class)->except(['create', 'edit']);
+// 创建视频资源路由，排除create,edit方法
+Route::resource('video', LessonController::class)->except(['create', 'edit']);
