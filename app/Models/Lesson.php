@@ -20,4 +20,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class); // 一个课程有多个视频
+    }
 }

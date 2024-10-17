@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            ChapterSeeder::class
+            ChapterSeeder::class,
+            // VideoSeeder::class
         ]);
         User::factory(10)->hasTipics(3)->create();
         // 修改第一个用户的信息
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $user->password = Hash::make('admin888');
         $user->save();
         // Tipic::factory(30)->create();
+
 
     }
 }

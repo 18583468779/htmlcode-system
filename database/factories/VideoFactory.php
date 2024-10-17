@@ -18,6 +18,8 @@ class VideoFactory extends Factory
     {
         return [
             //
+            "title" => fake()->sentence(5),
+            "path" => fake()->url()
         ];
     }
 }
