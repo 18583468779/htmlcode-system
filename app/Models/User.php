@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tipic::class); // 一个用户可以有多个帖子
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class); // 一个用户可以有多个订单
+
+    }
 }
