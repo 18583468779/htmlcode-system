@@ -75,4 +75,12 @@ class User extends Authenticatable
         return $this->hasMany(Order::class); // 一个用户可以有多个订单
 
     }
+    public function chapters(): Attribute
+    {
+        // $user->orders->pluck('chapter_id')->toArray() 获取当前用户的所有订单的章节id
+        // Chapter::whereIn('id', $user->orders->pluck('chapter_id'))->get()->toArray(); // 根据订单的章节id查询对应的章节
+        return Attribute::make(
+            get: fn() => Chapter::whereIn('id', $this->orders->pluck('chapter_id'))->get()
+        );
+    }
 }

@@ -5,6 +5,8 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TipicController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
+use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,4 +24,4 @@ Route::resource('chapter', ChapterController::class)->except(['create', 'edit'])
 // 创建课程资源路由，排除create,edit方法
 Route::resource('lesson', LessonController::class)->except(['create', 'edit']);
 // 创建视频资源路由，排除create,edit方法
-Route::resource('video', LessonController::class)->except(['create', 'edit']);
+Route::resource('video', controller: VideoController::class)->except(['create', 'edit']);

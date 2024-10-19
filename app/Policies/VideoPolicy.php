@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Chapter;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Auth\Access\Response;
@@ -21,7 +22,11 @@ class VideoPolicy
      */
     public function view(User $user, Video $video): bool
     {
-        //
+        // 用户购买项目时才可以查看视频
+        // dd($video->chapter->toArray());
+        // $user->chapters 是一个集合\
+        // 用户所购买的章节是否含有当前视频所在的章节
+        return $user->chapters->contains($video->chapter);
     }
 
     /**

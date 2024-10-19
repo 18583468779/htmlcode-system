@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateVideoRequest;
 use App\Http\Resources\VideoResource;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 class VideoController extends Controller implements HasMiddleware
 {
@@ -15,7 +16,7 @@ class VideoController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth', except: ['index', 'show'])
+            new Middleware('auth', except: ['index'])
         ];
     }
     /**
@@ -32,7 +33,7 @@ class VideoController extends Controller implements HasMiddleware
      */
     public function store(StoreVideoRequest $request)
     {
-        //章节（项目）-> 课程->视频 
+        //章节（项目）-> 课程->视频
     }
 
     /**
@@ -41,6 +42,8 @@ class VideoController extends Controller implements HasMiddleware
     public function show(Video $video)
     {
         //
+        Gate::authorize('view', $video);
+        return new VideoResource($video);
     }
 
     /**
