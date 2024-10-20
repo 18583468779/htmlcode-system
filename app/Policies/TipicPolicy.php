@@ -11,7 +11,7 @@ class TipicPolicy
     public function before(User $user, string $ability): bool|null
     {
         // 第一个调用的方法，用来放行超级管理员的操作
-        if ($user->isAdministrator) {
+        if (isAdministrator()) {
             return true;
         }
         return null;
