@@ -34,6 +34,8 @@ class VideoController extends Controller implements HasMiddleware
     public function store(StoreVideoRequest $request)
     {
         //章节（项目）-> 课程->视频
+        return $request->input();
+        // return new VideoResource()
     }
 
     /**
