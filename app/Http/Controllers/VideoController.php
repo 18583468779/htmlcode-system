@@ -27,7 +27,7 @@ class VideoController extends Controller implements HasMiddleware
     public function index()
     {
         //
-        return VideoResource::collection(Video::paginate(request('row', 10)));
+        return VideoResource::collection(Video::with('lesson')->paginate(request('row', 10)));
     }
 
     /**
@@ -58,7 +58,7 @@ class VideoController extends Controller implements HasMiddleware
     {
         //
         Gate::authorize('view', $video);
-        return new VideoResource($video);
+        return new VideoResource($video->makeVisible('path')); // 显示隐藏的属性
     }
 
     /**
