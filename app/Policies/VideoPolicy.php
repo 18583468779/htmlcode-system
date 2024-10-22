@@ -27,7 +27,7 @@ class VideoPolicy
         // dd($video->chapter->toArray());
         // $user->chapters 是一个集合\
         // 用户所购买的章节是否含有当前视频所在的章节
-        return $user->chapters->contains($video->chapter);
+        return  isAdministrator() || $user->chapters->contains($video->chapter);
     }
 
     /**
@@ -36,7 +36,7 @@ class VideoPolicy
     public function create(User $user): bool
     {
         //
-        return $user->is_administrator;
+
     }
 
     /**

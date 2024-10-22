@@ -13,7 +13,7 @@ class Video extends Model
         'title',
         'path'
     ];
-
+    public $hidden = ["path"]; // 隐藏播放地址
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
