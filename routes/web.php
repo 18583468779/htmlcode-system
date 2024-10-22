@@ -24,4 +24,6 @@ Route::resource('chapter', ChapterController::class)->except(['create', 'edit'])
 // 创建课程资源路由，排除create,edit方法
 Route::resource('lesson', LessonController::class)->except(['create', 'edit']);
 // 创建视频资源路由，排除create,edit方法
-Route::resource('video', controller: VideoController::class)->except(['create', 'edit']);
+Route::resource('video', controller: VideoController::class)->except(['create', 'edit', 'create', 'update']);
+Route::post('video/{lesson}', [VideoController::class, 'store']);
+Route::put('video', [VideoController::class, 'update']);

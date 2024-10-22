@@ -23,7 +23,6 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             //
-            "lesson_id" => ['required', 'exists:lessons,id'],
             "videos" => ['required', 'array']
         ];
     }

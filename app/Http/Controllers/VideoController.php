@@ -33,7 +33,7 @@ class VideoController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVideoRequest $request)
+    public function store(StoreVideoRequest $request, Lesson $lesson)
     {
         //章节（项目）-> 课程->视频
         // $request->validated("videos") ===  $request->videos; // 只会验证需要的字段
@@ -42,8 +42,6 @@ class VideoController extends Controller implements HasMiddleware
         //     $video->fill([...$data, "lesson_id" => request->lesson_id])->save();
         //     return $video;
         // });
-
-        $lesson = Lesson::findOrFail($request->lesson_id);
 
         $videos = collect($request->videos)->map(function ($data) use ($lesson) {
             return $lesson->videos()->create($data);
