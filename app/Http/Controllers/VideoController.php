@@ -42,6 +42,7 @@ class VideoController extends Controller implements HasMiddleware
         //     $video->fill([...$data, "lesson_id" => request->lesson_id])->save();
         //     return $video;
         // });
+
         $lesson = Lesson::findOrFail($request->lesson_id);
 
         $videos = collect($request->videos)->map(function ($data) use ($lesson) {
@@ -65,7 +66,16 @@ class VideoController extends Controller implements HasMiddleware
      */
     public function update(UpdateVideoRequest $request, Video $video)
     {
-        //
+        Gate::authorize('update', $video);
+        //更新视频操作
+        $lesson = Lesson::findOrFail($request->lesson_id);
+
+        $videos = collect($request->videos)->map(function ($data) use ($lesson) {
+            return $lesson->videos()->updateOrCreate([
+                'id' => $data->id ?? null // 判断视频是否有id，有id就是修改，没有就是新增
+            ], $data);
+        });
+        return new VideoResource($videos);
     }
 
     /**
@@ -74,5 +84,8 @@ class VideoController extends Controller implements HasMiddleware
     public function destroy(Video $video)
     {
         //
+        Gate::authorize('delete', $video);
+        $video->delete();
+        return response(null, 204);
     }
 }

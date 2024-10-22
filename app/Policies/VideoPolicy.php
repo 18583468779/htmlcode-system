@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\Response;
 
 class VideoPolicy
 {
+
     /**
      * Determine whether the user can view any models.
      */
@@ -35,6 +36,7 @@ class VideoPolicy
     public function create(User $user): bool
     {
         //
+        return $user->is_administrator;
     }
 
     /**
@@ -43,6 +45,7 @@ class VideoPolicy
     public function update(User $user, Video $video): bool
     {
         //
+        return $user->is_administrator;
     }
 
     /**
@@ -51,6 +54,7 @@ class VideoPolicy
     public function delete(User $user, Video $video): bool
     {
         //
+        return $user->is_administrator;
     }
 
     /**
