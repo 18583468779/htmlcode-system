@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\package;
+use App\Models\Package;
 use Illuminate\Auth\Access\Response;
 
 class PackagePolicy
@@ -30,6 +30,7 @@ class PackagePolicy
     public function create(User $user): bool
     {
         //
+        return isAdministrator();
     }
 
     /**
@@ -38,6 +39,7 @@ class PackagePolicy
     public function update(User $user, package $package): bool
     {
         //
+        return isAdministrator();
     }
 
     /**
@@ -46,6 +48,7 @@ class PackagePolicy
     public function delete(User $user, package $package): bool
     {
         //
+        return isAdministrator();
     }
 
     /**

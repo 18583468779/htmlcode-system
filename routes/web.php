@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\TipicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
@@ -27,3 +28,5 @@ Route::resource('lesson', LessonController::class)->except(['create', 'edit']);
 Route::resource('video', controller: VideoController::class)->except(['create', 'edit', 'create', 'update']);
 Route::post('video/{lesson}', [VideoController::class, 'store']);
 Route::put('video', [VideoController::class, 'update']);
+// 创建套餐资源
+Route::resource('package', PackageController::class)->except(['create', 'edit']);
