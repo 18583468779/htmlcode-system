@@ -62,11 +62,9 @@ class VideoController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVideoRequest $request, Video $video)
+    public function update(UpdateVideoRequest $request, Lesson $lesson)
     {
-        Gate::authorize('update', $video);
-        //更新视频操作
-        $lesson = Lesson::findOrFail($request->lesson_id);
+        Gate::authorize('update', Video::class);
 
         $videos = collect($request->videos)->map(function ($data) use ($lesson) {
             return $lesson->videos()->updateOrCreate([

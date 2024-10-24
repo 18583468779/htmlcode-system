@@ -36,16 +36,16 @@ class VideoPolicy
     public function create(User $user): bool
     {
         //
-
+        return  isAdministrator();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Video $video): bool
+    public function update(User $user): bool
     {
         //
-        return $user->is_administrator;
+        return  isAdministrator();
     }
 
     /**
@@ -54,7 +54,7 @@ class VideoPolicy
     public function delete(User $user, Video $video): bool
     {
         //
-        return $user->is_administrator;
+        return  isAdministrator();
     }
 
     /**
