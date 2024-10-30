@@ -83,4 +83,9 @@ class User extends Authenticatable
             get: fn() => Chapter::whereIn('id', $this->orders->pluck('chapter_id'))->get()
         );
     }
+    public function signs()
+    {
+        return $this->hasMany(Sign::class); // 一个用户可以有多个订单
+
+    }
 }

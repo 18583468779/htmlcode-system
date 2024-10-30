@@ -4,10 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\SignController;
 use App\Http\Controllers\TipicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
-use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,3 +30,5 @@ Route::post('video/{lesson}', [VideoController::class, 'store']);
 Route::put('video', [VideoController::class, 'update']);
 // 创建套餐资源
 Route::resource('package', PackageController::class)->except(['create', 'edit']);
+// 创建签到资源
+Route::resource('sign', SignController::class)->except(['create', 'edit']);
